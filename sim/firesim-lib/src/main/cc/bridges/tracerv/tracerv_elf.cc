@@ -75,8 +75,8 @@ void *elf_t::section_data(const char *name, size_t *size) {
 
 std::pair<uint64_t, uint64_t> elf_t::subroutines(subroutine_map &table) {
   {
-    dwarf_t dwarf(this->elf);
-    dwarf.subroutines(table);
+//    dwarf_t dwarf(this->elf);
+//    dwarf.subroutines(table);
   }
 
   size_t shnum;

@@ -41,46 +41,46 @@ private:
   Dwarf_Debug dbg;
 };
 
-dwarf_t::dwarf_t(Elf *elf) {
-  Dwarf_Error err;
-  if (dwarf_elf_init(
-          elf, DW_DLC_READ, &dwarf_runtime_error, nullptr, &this->dbg, &err) !=
-      DW_DLV_OK) {
-    this->dbg = nullptr;
-  }
-}
+// dwarf_t::dwarf_t(Elf *elf) {
+//   Dwarf_Error err;
+//   if (dwarf_elf_init(
+//           elf, DW_DLC_READ, &dwarf_runtime_error, nullptr, &this->dbg, &err) !=
+//       DW_DLV_OK) {
+//     this->dbg = nullptr;
+//   }
+// }
 
 void dwarf_t::subroutines(subroutine_map &table) {
   if (this->dbg == nullptr) {
     return;
   }
   Dwarf_Unsigned next_cu_offset;
-  while (dwarf_next_cu_header_c(this->dbg,
-                                1,       // is_info
-                                nullptr, // cu_header_length
-                                nullptr, // version_stamp
-                                nullptr, // abbrev_offset
-                                nullptr, // address_size
-                                nullptr, // offset_size
-                                nullptr, // extension_size
-                                nullptr, // signature
-                                nullptr, // typeoffset
-                                &next_cu_offset,
-                                nullptr) == DW_DLV_OK) {
+  // while (dwarf_next_cu_header_c(this->dbg,
+  //                               1,       // is_info
+  //                               nullptr, // cu_header_length
+  //                               nullptr, // version_stamp
+  //                               nullptr, // abbrev_offset
+  //                               nullptr, // address_size
+  //                               nullptr, // offset_size
+  //                               nullptr, // extension_size
+  //                               nullptr, // signature
+  //                               nullptr, // typeoffset
+  //                               &next_cu_offset,
+  //                               nullptr) == DW_DLV_OK) {
 
-    // Expect CU to have an initial DIE
-    Dwarf_Die die;
-    if (dwarf_siblingof(this->dbg, nullptr, &die, nullptr) != DW_DLV_OK) {
-      continue;
-    }
-    die_ptr die_wrap(die, dwarf_deleter(dbg));
+  //   // Expect CU to have an initial DIE
+  //   Dwarf_Die die;
+  //   if (dwarf_siblingof(this->dbg, nullptr, &die, nullptr) != DW_DLV_OK) {
+  //     continue;
+  //   }
+  //   die_ptr die_wrap(die, dwarf_deleter(dbg));
 
-    if (dwarf_child(die, &die, nullptr) == DW_DLV_OK) {
-      die_wrap = die_ptr(die, dwarf_deleter(dbg));
-      // Enumerate subprograms
-      this->siblings(std::move(die_wrap), &dwarf_t::die_subprogram, table);
-    }
-  }
+  //   if (dwarf_child(die, &die, nullptr) == DW_DLV_OK) {
+  //     die_wrap = die_ptr(die, dwarf_deleter(dbg));
+  //     // Enumerate subprograms
+  //     this->siblings(std::move(die_wrap), &dwarf_t::die_subprogram, table);
+  //   }
+  // }
 }
 
 // Traverse siblings of a given DIE
@@ -88,15 +88,15 @@ template <typename T>
 void dwarf_t::siblings(die_ptr die,
                        void (dwarf_t::*fn)(Dwarf_Die, T &),
                        T &arg) {
-  for (;;) {
-    Dwarf_Die p = die.get();
-
-    (this->*fn)(p, arg);
-    if (dwarf_siblingof(this->dbg, p, &p, nullptr) != DW_DLV_OK) {
-      return;
-    }
-    die = die_ptr(p, dwarf_deleter(dbg));
-  }
+//  for (;;) {
+//    Dwarf_Die p = die.get();
+//
+//    (this->*fn)(p, arg);
+//    if (dwarf_siblingof(this->dbg, p, &p, nullptr) != DW_DLV_OK) {
+//      return;
+//    }
+//    die = die_ptr(p, dwarf_deleter(dbg));
+//  }
 }
 
 void dwarf_t::die_callsite(Dwarf_Die die, std::vector<callsite_t> &table) {

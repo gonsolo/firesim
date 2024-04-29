@@ -20,7 +20,7 @@ r_dir = $(abspath ../resources)
 PLATFORM ?= f1
 OUT_DIR ?= $(GEN_DIR)
 
-override CXXFLAGS += -Wall -I$(midas_dir) -I$(GEN_DIR)
+override CXXFLAGS += -Wall -I$(midas_dir) -I$(GEN_DIR) -I/usr/include/libdwarf/libdwarf-0
 override LDFLAGS += -L$(GEN_DIR) -lstdc++ -lpthread -lgmp
 
 DESIGN_V  ?= $(GEN_DIR)/$(GEN_FILE_BASENAME).sv
