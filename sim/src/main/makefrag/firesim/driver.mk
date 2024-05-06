@@ -38,6 +38,6 @@ TARGET_CXX_FLAGS += -g \
 	-I$(driver_dir)/firesim \
 	-I$(firesim_lib_dir) \
 	-I$(GENERATED_DIR) \
-	-Wno-inconsistent-missing-override
+	# not available for gcc: -Wno-inconsistent-missing-override
 TARGET_LD_FLAGS += -L$(CONDA_PREFIX)/lib -l:libdwarf.so -l:libelf.so -lz -L$(RISCV)/lib -Wl,-rpath,$(RISCV)/lib $(LRISCV)
 # DOC include end: Bridge Build System Changes
