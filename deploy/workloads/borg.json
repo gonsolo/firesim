@@ -1,0 +1,19 @@
+{
+  "common_bootbinary" : "br-base-bin",
+  "benchmark_name" : "borg",
+  "deliver_dir" : "/",
+  "common_args" : [],
+  "common_files" : [],
+  "common_outputs" : [],
+  "common_simulation_outputs" : ["uartlog"],
+  "no_post_run_hook": "",
+  "workloads" : [
+    {
+      "name": "borgnode",
+      "files": ["print-borg"],
+      "command": "/print-borg && echo 'After borg powering off immediately.'",
+      "simulation_outputs": [],
+      "outputs": []
+    }
+  ]
+}

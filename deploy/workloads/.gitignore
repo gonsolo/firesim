@@ -8,6 +8,7 @@ check-rtc-linux
 bw-test-one-instance/*.riscv
 bw-test-two-instances/*.riscv
 linux-poweroff
+borg
 unittest/STRESSRUNS
 /gapbs
 sha3-bare-rocc.json

@@ -15,6 +15,9 @@ check-rtc: check-rtc.o crt.o syscalls.o
 print-mcycle-linux: print-mcycle.c
 	$(CC_LINUX) $(CFLAGS_LINUX) $(LDFLAGS_LINUX) $< -o $@
 
+print-borg: print-borg.c
+	$(CC_LINUX) $(CFLAGS_LINUX) $(LDFLAGS_LINUX) $< -o $@
+
 %.o: %.c util.h encoding.h
 	$(CC) $(CFLAGS) -c $< -o $@
 

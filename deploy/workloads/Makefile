@@ -57,6 +57,12 @@ linux-poweroff:
 	cp ../../sw/check-rtc/print-mcycle-linux $@/overlay/
 	python3 gen-benchmark-rootfs.py -w $@.json -r -b $(BASE_IMAGE) -s $@/overlay
 
+borg:
+	mkdir -p $@/overlay
+	cd ../../sw/check-rtc && make print-borg
+	cp ../../sw/check-rtc/print-borg $@/overlay/
+	python3 gen-benchmark-rootfs.py -w $@.json -r -b $(BASE_IMAGE) -s $@/overlay
+
 simperf-test-scale: simperf-test
 
 simperf-test-latency: simperf-test
@@ -102,4 +108,4 @@ coremark:
 	ping-latency simperf-test simperf-test-latency simperf-test-scale \
 	iperf3 check-rtc check-rtc-linux allpaper checksum-test \
 	ccbench-cache-sweep flash-stress fc-test coremark \
-	linux-poweroff
+	linux-poweroff borg
